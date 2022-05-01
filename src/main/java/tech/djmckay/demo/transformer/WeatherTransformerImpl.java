@@ -1,4 +1,4 @@
-package tech.djmckay.demo.dto;
+package tech.djmckay.demo.transformer;
 
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -6,8 +6,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import tech.djmckay.demo.dto.Forecast;
+import tech.djmckay.demo.dto.Weather;
 import tech.djmckay.demo.model.Period;
-import tech.djmckay.demo.transformer.WeatherTransformer;
 
 @Component
 public class WeatherTransformerImpl implements WeatherTransformer {

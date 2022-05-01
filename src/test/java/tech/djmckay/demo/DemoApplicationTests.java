@@ -26,6 +26,8 @@ class DemoApplicationTests {
 	
 	@Test
     public void testWebTestClientWithController() {
+		System.out.println("*** TEST " + "testWebTestClientWithController" + " ***");
+
         WebTestClient.bindToServer()
         	.baseUrl("http://localhost:" + port)
             .build()
@@ -41,6 +43,8 @@ class DemoApplicationTests {
 	
 	@Test
     public void testWebTestClientWithAsyncController() {
+		System.out.println("*** TEST " + "testWebTestClientWithAsyncController" + " ***");
+
         WebTestClient.bindToServer()
         	.baseUrl("http://localhost:" + port)
             .build()
@@ -86,6 +90,29 @@ class DemoApplicationTests {
 	}
 	
 	@Test
+	public void testWebclientBlock() {
+
+		System.out.println("*** TEST " + "testWebclientBlock" + " ***");
+
+
+		WebClient client = WebClient.create(SERVER_URL+port);
+		final long startTime = System.currentTimeMillis();
+
+		Mono<Weather> result = client.get() //
+				.uri("/weather/today") //
+				.accept(MediaType.APPLICATION_JSON) //
+				.retrieve() //
+				.bodyToMono(Weather.class);
+
+		// Wait for account to be returned
+
+		Weather weather = result.block();
+		System.out.println(System.currentTimeMillis() - startTime);
+		System.out.println("Weather: " + weather.getDaily().get(0).getForecastBlurp());
+
+	}
+	
+	@Test
 	public void testAsyncWebclient() {
 
 		System.out.println("*** TEST " + "testAsyncWebclient" + " ***");
@@ -114,6 +141,31 @@ class DemoApplicationTests {
 			System.out.println(System.currentTimeMillis() - startTime);
 			System.out.println("Weather: " + a.getDaily().get(0).getForecastBlurp());
 		});
+	}
+	
+	@Test
+	public void testAsyncWebclientBlock() {
+
+		System.out.println("*** TEST " + "testAsyncWebclientBlock" + " ***");
+
+
+		WebClient client = WebClient.create(SERVER_URL+port);
+		final long startTime = System.currentTimeMillis();
+
+		Mono<Weather> result = client.get() //
+				.uri("/weather/async/today") //
+				.accept(MediaType.APPLICATION_JSON) //
+				.retrieve() //
+				.bodyToMono(Weather.class);
+
+		// Wait for account to be returned
+
+		Weather weather = result.block();
+
+		System.out.println("Weather: " + weather.getDaily().get(0).getForecastBlurp());
+		System.out.println(System.currentTimeMillis() - startTime);
+
+		
 	}
 
 }

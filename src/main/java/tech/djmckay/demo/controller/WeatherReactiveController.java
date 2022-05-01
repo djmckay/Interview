@@ -12,18 +12,24 @@ import tech.djmckay.demo.service.WeatherAsyncService;
 
 @RestController
 @RequestMapping("/weather/async")
-public class WeatherAsyncController {
+public class WeatherReactiveController {
 
 	@Autowired
 	private WeatherAsyncService weatherService;
 	
 	@GetMapping("/today")
 	public @ResponseBody Mono<Weather> getToday() {
-		return weatherService.getToday(); 
+		final long startTime = System.currentTimeMillis();
+		Mono<Weather> response = weatherService.getToday(); 
+		System.out.println(System.currentTimeMillis() - startTime);
+		return response;
 	}
 	
 	@GetMapping("/today/all")
 	public @ResponseBody Mono<Weather> getTodayAll() {
-		return weatherService.getTodayAll(); 
+		final long startTime = System.currentTimeMillis();
+		Mono<Weather> response =  weatherService.getTodayAll(); 
+		System.out.println(System.currentTimeMillis() - startTime);
+		return response;
 	}
 }

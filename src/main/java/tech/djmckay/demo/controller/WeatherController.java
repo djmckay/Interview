@@ -19,12 +19,18 @@ public class WeatherController {
 	
 	@GetMapping("/today")
 	public @ResponseBody Weather getToday() {
-		return weatherService.getToday(); 
+		final long startTime = System.currentTimeMillis();
+		Weather response = weatherService.getToday(); 
+		System.out.println(System.currentTimeMillis() - startTime);
+		return response;
 	}
 	
 	@GetMapping("/today/all")
 	public @ResponseBody Weather getTodayAll() {
-		return weatherService.getTodayAll(); 
+		final long startTime = System.currentTimeMillis();
+		Weather response = weatherService.getTodayAll(); 
+		System.out.println(System.currentTimeMillis() - startTime);
+		return response;
 	}
 	
 	

@@ -17,7 +17,7 @@ public class WeatherRepoImpl implements WeatherRepo {
 	@Override
 	public Mono<Weather> getDaily() {
 		WebClient client = WebClient.create(url);
-		Mono<Weather> result = client.get() .uri("gridpoints/MLB/33,70/forecast?units=us") 
+		Mono<Weather> result = client.get() .uri("gridpoints/MLB/33,70/forecast") 
 		.accept(MediaType.APPLICATION_JSON) 
 		.retrieve() // Send request
 		.bodyToMono(Weather.class);

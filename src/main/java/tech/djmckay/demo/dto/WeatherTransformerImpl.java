@@ -1,5 +1,6 @@
 package tech.djmckay.demo.dto;
 
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,8 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 	
 	public Weather transform(tech.djmckay.demo.model.Weather item, Predicate<? super Period> predicate) {
 		Weather transformedItem = new Weather();
+		Optional.ofNullable(item.getProperties()).orElseThrow();
+		Optional.ofNullable(item.getProperties().getPeriods()).orElseThrow();
 		transformedItem.setDaily(item.getProperties().getPeriods().stream().filter(predicate)
 		.map(today -> {
 			Forecast daily = new Forecast();
@@ -25,7 +28,7 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 	}
 
 	private String convertToCelsius(Period today) {
-		if (today.getTemperatureUnit().equalsIgnoreCase("C")) {
+		if ("C".equalsIgnoreCase(today.getTemperatureUnit())) {
 			return today.getTemperature();
 		}
 		Double f = Double.valueOf(today.getTemperature());

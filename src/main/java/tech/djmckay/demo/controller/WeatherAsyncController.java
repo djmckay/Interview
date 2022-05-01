@@ -6,26 +6,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import reactor.core.publisher.Mono;
 import tech.djmckay.demo.dto.Weather;
 import tech.djmckay.demo.service.WeatherAsyncService;
-import tech.djmckay.demo.service.WeatherService;
 
 @RestController
-@RequestMapping("/weather")
-public class WeatherController {
+@RequestMapping("/weather/async")
+public class WeatherAsyncController {
 
 	@Autowired
-	private WeatherService weatherService;
+	private WeatherAsyncService weatherService;
 	
 	@GetMapping("/today")
-	public @ResponseBody Weather getToday() {
+	public @ResponseBody Mono<Weather> getToday() {
 		return weatherService.getToday(); 
 	}
 	
 	@GetMapping("/today/all")
-	public @ResponseBody Weather getTodayAll() {
+	public @ResponseBody Mono<Weather> getTodayAll() {
 		return weatherService.getTodayAll(); 
 	}
-	
-	
 }

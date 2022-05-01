@@ -2,7 +2,6 @@ package tech.djmckay.demo.service.impl;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,11 @@ import reactor.core.publisher.Mono;
 import tech.djmckay.demo.dto.Weather;
 import tech.djmckay.demo.model.Period;
 import tech.djmckay.demo.repo.WeatherRepo;
-import tech.djmckay.demo.service.WeatherService;
+import tech.djmckay.demo.service.WeatherAsyncService;
 import tech.djmckay.demo.transformer.WeatherTransformer;
 
 @Service
-public class WeatherServiceImpl implements WeatherService {
+public class WeatherAsyncServiceImpl implements WeatherAsyncService {
 
 	@Autowired
 	private WeatherRepo weatherRepo;
@@ -25,11 +24,10 @@ public class WeatherServiceImpl implements WeatherService {
 	private WeatherTransformer weatherTransformer;
 
 	private Predicate<? super Period> latest = period -> {
-		return "1".equals(period.getNumber());
+		return period.getNumber().equals("1");
 	};
 	
 	private Predicate<? super Period> todayAllPeriods = period -> {
-		Optional.ofNullable(period.getStartTime()).orElseThrow();
 		LocalDate.now().atStartOfDay();
 		LocalDate.now().datesUntil(period.getStartTime().toInstant()
 				.atZone(ZoneId.systemDefault()).toLocalDate());
@@ -39,24 +37,25 @@ public class WeatherServiceImpl implements WeatherService {
 	
 
 	@Override
-	public Weather getToday() {
+	public Mono<Weather> getToday() {
 		return this.getToday(latest);
 	}
 
 	@Override
-	public Weather getTodayAll() {
+	public Mono<Weather> getTodayAll() {
 		return this.getToday(todayAllPeriods);
 	}
 	
-	private Weather getToday(Predicate<? super Period> predicate) {
-		Weather weather = weatherRepo.getDaily()
+	private Mono<Weather> getToday(Predicate<? super Period> predicate) {
+		Mono<Weather> weather = weatherRepo.getDaily()
 				.doOnError(e -> {
 			e.printStackTrace();
 			throw new RuntimeException("Error Retrieving Weather");
 		}).map(item -> {
 			return weatherTransformer.transform(item, predicate);
-		}).block();
+		});
 		return weather;
 	}
+	
 
 }

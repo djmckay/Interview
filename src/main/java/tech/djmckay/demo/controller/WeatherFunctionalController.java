@@ -14,6 +14,11 @@ import tech.djmckay.demo.service.WeatherAsyncService;
 public class WeatherFunctionalController {
 
 
+	/**
+	 * http://localhost:8080/weather/functional/today/
+	 * @param ws
+	 * @return
+	 */
 	public RouterFunction<ServerResponse> weather(WeatherAsyncService ws) {
 		return route().nest(RequestPredicates.path("/weather/functional"), builder -> {
 			builder.GET("/today/all", req -> ok().body(ws.getTodayAll()));

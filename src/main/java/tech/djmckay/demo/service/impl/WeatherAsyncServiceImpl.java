@@ -47,13 +47,16 @@ public class WeatherAsyncServiceImpl implements WeatherAsyncService {
 	}
 	
 	private Mono<Weather> getToday(Predicate<? super Period> predicate) {
+		System.out.println("Reactive Service start");
 		Mono<Weather> weather = weatherRepo.getDaily()
 				.doOnError(e -> {
 			e.printStackTrace();
 			throw new RuntimeException("Error Retrieving Weather");
 		}).map(item -> {
+			System.out.println("Reactive Map Start");
 			return weatherTransformer.transform(item, predicate);
 		});
+		System.out.println("Reactive Service end");
 		return weather;
 	}
 	

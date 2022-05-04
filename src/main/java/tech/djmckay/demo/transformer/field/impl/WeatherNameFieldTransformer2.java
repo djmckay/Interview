@@ -1,10 +1,8 @@
 package tech.djmckay.demo.transformer.field.impl;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
-import java.util.Calendar;
 import java.util.Locale;
 import java.util.Optional;
 

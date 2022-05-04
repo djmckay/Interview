@@ -19,17 +19,22 @@ public class WeatherReactiveController {
 	
 	@GetMapping("/today")
 	public @ResponseBody Mono<Weather> getToday() {
+		System.out.println("Reactive Controller start");
 		final long startTime = System.currentTimeMillis();
 		Mono<Weather> response = weatherService.getToday(); 
 		System.out.println(System.currentTimeMillis() - startTime);
+		System.out.println("Reactive Controller end");
 		return response;
 	}
 	
 	@GetMapping("/today/all")
 	public @ResponseBody Mono<Weather> getTodayAll() {
+		System.out.println("Reactive Controller start");
 		final long startTime = System.currentTimeMillis();
 		Mono<Weather> response =  weatherService.getTodayAll(); 
 		System.out.println(System.currentTimeMillis() - startTime);
+		System.out.println("Reactive Controller end");
+
 		return response;
 	}
 }

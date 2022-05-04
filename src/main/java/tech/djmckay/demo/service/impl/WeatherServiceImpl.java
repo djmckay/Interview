@@ -2,11 +2,14 @@ package tech.djmckay.demo.service.impl;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.stream.Collectors;
 
 import reactor.core.publisher.Mono;
 import tech.djmckay.demo.dto.Weather;
@@ -49,13 +52,20 @@ public class WeatherServiceImpl implements WeatherService {
 	}
 	
 	private Weather getToday(Predicate<? super Period> predicate) {
+		System.out.println("Blocking Service start");
 		Weather weather = weatherRepo.getDaily()
 				.doOnError(e -> {
 			e.printStackTrace();
 			throw new RuntimeException("Error Retrieving Weather");
-		}).map(item -> {
+//		}).map(item -> {
+//			List<Period> filteredItem = item.getProperties().getPeriods().stream().filter(predicate)
+//					.collect(Collectors.toList());
+//			return filteredItem;
+		})
+				.map(item -> {
 			return weatherTransformer.transform(item, predicate);
 		}).block();
+		System.out.println("Blocking Service End");
 		return weather;
 	}
 

@@ -57,10 +57,6 @@ public class WeatherServiceImpl implements WeatherService {
 				.doOnError(e -> {
 			e.printStackTrace();
 			throw new RuntimeException("Error Retrieving Weather");
-//		}).map(item -> {
-//			List<Period> filteredItem = item.getProperties().getPeriods().stream().filter(predicate)
-//					.collect(Collectors.toList());
-//			return filteredItem;
 		})
 				.map(item -> {
 			return weatherTransformer.transform(item, predicate);

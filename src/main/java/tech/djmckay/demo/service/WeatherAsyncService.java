@@ -8,4 +8,5 @@ public interface WeatherAsyncService {
 	public Mono<Weather> getToday();
 
 	public Mono<Weather> getTodayAll();
+
 }

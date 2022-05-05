@@ -7,4 +7,5 @@ public interface WeatherService {
 	public Weather getToday();
 
 	public Weather getTodayAll();
+
 }

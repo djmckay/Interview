@@ -28,7 +28,7 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 				.filter(predicate)
 				.map(today -> {
 			Forecast daily = new Forecast();
-			weatherFieldTransformers.parallelStream().forEach(transformer -> {
+			weatherFieldTransformers.stream().forEach(transformer -> {
 				transformer.transform(daily, today);
 			});
 			return daily;

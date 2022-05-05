@@ -13,6 +13,7 @@ import tech.djmckay.demo.model.Period;
 import tech.djmckay.demo.repo.WeatherRepo;
 import tech.djmckay.demo.service.WeatherAsyncService;
 import tech.djmckay.demo.transformer.WeatherTransformer;
+import tech.djmckay.demo.transformer.utils.WeatherUtilities;
 
 @Service
 public class WeatherAsyncServiceImpl implements WeatherAsyncService {
@@ -23,27 +24,14 @@ public class WeatherAsyncServiceImpl implements WeatherAsyncService {
 	@Autowired
 	private WeatherTransformer weatherTransformer;
 
-	private Predicate<? super Period> latest = period -> {
-		return period.getNumber().equals("1");
-	};
-	
-	private Predicate<? super Period> todayAllPeriods = period -> {
-		LocalDate.now().atStartOfDay();
-		LocalDate.now().datesUntil(period.getStartTime().toInstant()
-				.atZone(ZoneId.systemDefault()).toLocalDate());
-		return LocalDate.now().datesUntil(period.getStartTime().toInstant()
-				.atZone(ZoneId.systemDefault()).toLocalDate()).count() == 0;
-	};
-	
-
 	@Override
 	public Mono<Weather> getToday() {
-		return this.getToday(latest);
+		return this.getToday(WeatherUtilities.latest);
 	}
 
 	@Override
 	public Mono<Weather> getTodayAll() {
-		return this.getToday(todayAllPeriods);
+		return this.getToday(WeatherUtilities.todayAllPeriods);
 	}
 	
 	private Mono<Weather> getToday(Predicate<? super Period> predicate) {

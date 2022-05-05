@@ -17,6 +17,7 @@ import tech.djmckay.demo.model.Period;
 import tech.djmckay.demo.repo.WeatherRepo;
 import tech.djmckay.demo.service.WeatherService;
 import tech.djmckay.demo.transformer.WeatherTransformer;
+import tech.djmckay.demo.transformer.utils.WeatherUtilities;
 
 @Service
 public class WeatherServiceImpl implements WeatherService {
@@ -26,29 +27,16 @@ public class WeatherServiceImpl implements WeatherService {
 	
 	@Autowired
 	private WeatherTransformer weatherTransformer;
-
-	private Predicate<? super Period> latest = period -> {
-		return "1".equals(period.getNumber());
-	};
-	
-	private Predicate<? super Period> todayAllPeriods = period -> {
-		Optional.ofNullable(period.getStartTime()).orElseThrow();
-		LocalDate.now().atStartOfDay();
-		LocalDate.now().datesUntil(period.getStartTime().toInstant()
-				.atZone(ZoneId.systemDefault()).toLocalDate());
-		return LocalDate.now().datesUntil(period.getStartTime().toInstant()
-				.atZone(ZoneId.systemDefault()).toLocalDate()).count() == 0;
-	};
 	
 
 	@Override
 	public Weather getToday() {
-		return this.getToday(latest);
+		return this.getToday(WeatherUtilities.latest);
 	}
 
 	@Override
 	public Weather getTodayAll() {
-		return this.getToday(todayAllPeriods);
+		return this.getToday(WeatherUtilities.todayAllPeriods);
 	}
 	
 	private Weather getToday(Predicate<? super Period> predicate) {

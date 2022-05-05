@@ -13,9 +13,13 @@ import tech.djmckay.demo.service.WeatherService;
 @RequestMapping("/weather")
 public class WeatherController {
 
-	@Autowired
 	private WeatherService weatherService;
-	
+
+	@Autowired
+	public void setWeatherService(WeatherService weatherService) {
+		this.weatherService = weatherService;
+	}
+
 	@GetMapping("/today")
 	public @ResponseBody Weather getToday() {
 		System.out.println("Rest Controller start");

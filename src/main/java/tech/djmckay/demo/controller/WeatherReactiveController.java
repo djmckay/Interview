@@ -14,8 +14,12 @@ import tech.djmckay.demo.service.WeatherAsyncService;
 @RequestMapping("/weather/async")
 public class WeatherReactiveController {
 
-	@Autowired
 	private WeatherAsyncService weatherService;
+	
+	@Autowired
+	public void setWeatherService(WeatherAsyncService weatherService) {
+		this.weatherService = weatherService;
+	}
 	
 	@GetMapping("/today")
 	public @ResponseBody Mono<Weather> getToday() {

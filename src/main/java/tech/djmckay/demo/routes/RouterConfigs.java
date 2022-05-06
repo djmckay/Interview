@@ -7,7 +7,6 @@ import org.springframework.web.servlet.function.ServerResponse;
 
 import tech.djmckay.demo.controller.WeatherFunctionalController;
 import tech.djmckay.demo.service.WeatherAsyncService;
-import tech.djmckay.demo.service.WeatherService;
 
 @Configuration
 public class RouterConfigs {

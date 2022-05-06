@@ -1,17 +1,8 @@
 package tech.djmckay.demo.service.impl;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.stream.Collectors;
-
-import reactor.core.publisher.Mono;
 import tech.djmckay.demo.dto.Weather;
 import tech.djmckay.demo.model.Period;
 import tech.djmckay.demo.repo.WeatherRepo;
@@ -22,12 +13,18 @@ import tech.djmckay.demo.transformer.utils.WeatherUtilities;
 @Service
 public class WeatherServiceImpl implements WeatherService {
 
-	@Autowired
 	private WeatherRepo weatherRepo;
-	
-	@Autowired
 	private WeatherTransformer weatherTransformer;
-	
+
+	@Autowired
+	public void setWeatherRepo(WeatherRepo weatherRepo) {
+		this.weatherRepo = weatherRepo;
+	}
+
+	@Autowired
+	public void setWeatherTransformer(WeatherTransformer weatherTransformer) {
+		this.weatherTransformer = weatherTransformer;
+	}
 
 	@Override
 	public Weather getToday() {

@@ -1,7 +1,5 @@
 package tech.djmckay.demo.service.impl;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.function.Predicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +16,19 @@ import tech.djmckay.demo.transformer.utils.WeatherUtilities;
 @Service
 public class WeatherAsyncServiceImpl implements WeatherAsyncService {
 
-	@Autowired
 	private WeatherRepo weatherRepo;
-	
-	@Autowired
 	private WeatherTransformer weatherTransformer;
 
+	@Autowired
+	public void setWeatherRepo(WeatherRepo weatherRepo) {
+		this.weatherRepo = weatherRepo;
+	}
+
+	@Autowired
+	public void setWeatherTransformer(WeatherTransformer weatherTransformer) {
+		this.weatherTransformer = weatherTransformer;
+	}
+	
 	@Override
 	public Mono<Weather> getToday() {
 		return this.getToday(WeatherUtilities.latest);

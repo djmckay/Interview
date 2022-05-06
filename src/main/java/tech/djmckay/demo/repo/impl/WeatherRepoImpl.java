@@ -13,8 +13,12 @@ import tech.djmckay.demo.repo.WeatherRepo;
 @Repository
 public class WeatherRepoImpl implements WeatherRepo {
 
-	@Autowired
 	private WebClient weatherClient;
+	
+	@Autowired
+	public void setWeatherClient(WebClient weatherClient) {
+		this.weatherClient = weatherClient;
+	}
 	
 	@Value("${WEATHER_SERVER_UNITS:}")
 	private String units;

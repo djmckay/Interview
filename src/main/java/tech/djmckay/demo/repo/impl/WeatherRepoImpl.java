@@ -31,8 +31,12 @@ public class WeatherRepoImpl implements WeatherRepo {
 		
 		Mono<Weather> result = weatherClient.get() .uri(endpoint) 
 		.accept(MediaType.APPLICATION_JSON)
-		.retrieve() 
-		.bodyToMono(Weather.class);
+//		.exchangeToMono(item -> {
+//			item.statusCode().is2xxSuccessful();
+//			return item.bodyToMono(Weather.class);
+//				});
+				.retrieve()
+				.bodyToMono(Weather.class);
 		System.out.println("Reactive Repo end");
 
 		return result;

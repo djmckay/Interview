@@ -49,6 +49,7 @@ public class WeatherAsyncServiceImpl implements WeatherAsyncService {
 			System.out.println("Reactive Map Start");
 			return weatherTransformer.transform(item, predicate);
 		});
+		//Mono<Weather> weather = weatherTransformer.transform(weatherRepo.getDaily(), predicate);
 		System.out.println("Reactive Service end");
 		return weather;
 	}

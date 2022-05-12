@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import reactor.core.publisher.Mono;
 import tech.djmckay.demo.dto.Forecast;
 import tech.djmckay.demo.dto.Weather;
 import tech.djmckay.demo.model.Period;
@@ -28,14 +30,34 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 				.filter(predicate)
 				.map(today -> {
 			Forecast daily = new Forecast();
-			weatherFieldTransformers.stream().forEach(transformer -> {
-				transformer.transform(daily, today);
-			});
+			weatherFieldTransformers.forEach(transformer ->
+				transformer.transform(daily, today)
+			);
 			return daily;
 		}).collect(Collectors.toList()));
 		return transformedItem;
 	}
 
-	
-	
+	@Override
+	public Mono<Weather> transform(Mono<tech.djmckay.demo.model.Weather> item, Predicate<? super Period> predicate) {
+		System.out.println("Reactive Transformer start");
+		return item.map(weather -> {
+			Weather transformedItem = new Weather();
+			List<Forecast> results = weather.getProperties().getPeriods().stream()
+					.filter(predicate)
+					.map(today -> {
+						Forecast daily = new Forecast();
+						weatherFieldTransformers.forEach(transformer ->
+							transformer.transform(daily, today)
+						);
+						return daily;
+					}).collect(Collectors.toList());
+			transformedItem.setDaily(results);
+			System.out.println("Reactive Transformer end");
+			return transformedItem;
+		});
+		
+	}
+
+
 }

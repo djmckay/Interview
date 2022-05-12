@@ -29,12 +29,8 @@ public class WeatherRepoImpl implements WeatherRepo {
 		String endpoint = units.isEmpty() ? "gridpoints/MLB/33,70/forecast" : "gridpoints/MLB/33,70/forecast?units="+units;
 		
 		
-		Mono<Weather> result = weatherClient.get() .uri(endpoint) 
-		.accept(MediaType.APPLICATION_JSON)
-//		.exchangeToMono(item -> {
-//			item.statusCode().is2xxSuccessful();
-//			return item.bodyToMono(Weather.class);
-//				});
+		Mono<Weather> result = weatherClient.get() .uri(endpoint)
+				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.bodyToMono(Weather.class);
 		System.out.println("Reactive Repo end");

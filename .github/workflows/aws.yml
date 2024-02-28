@@ -35,7 +35,7 @@ env:
   ECR_REPOSITORY: disney-weather-service           # set this to your Amazon ECR repository name
   ECS_SERVICE: disney-weather-service-app                # set this to your Amazon ECS service name
   ECS_CLUSTER: disney-weather-service-cluster                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: aws/weather-service-run-task.json # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: aws/weather-service-task-definition.json # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: disnery-weather-service           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition

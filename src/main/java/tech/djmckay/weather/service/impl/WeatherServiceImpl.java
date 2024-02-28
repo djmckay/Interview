@@ -5,15 +5,19 @@ import java.time.ZoneId;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import tech.djmckay.weather.dto.WeatherResponse;
 import tech.djmckay.weather.model.Period;
 import tech.djmckay.weather.repo.WeatherRepo;
 import tech.djmckay.weather.service.WeatherService;
 import tech.djmckay.weather.transformer.WeatherTransformer;
+import tech.djmckay.weather.transformer.impl.WeatherTransformerImpl;
 import tech.djmckay.weather.transformer.utils.WeatherUtilities;
 
 @Service
@@ -21,6 +25,8 @@ public class WeatherServiceImpl implements WeatherService {
 
 	private WeatherRepo weatherRepo;
 	private WeatherTransformer weatherTransformer;
+
+	Logger logger = LoggerFactory.getLogger(WeatherServiceImpl.class);
 
 	@Autowired
 	public void setWeatherRepo(WeatherRepo weatherRepo) {
@@ -34,26 +40,21 @@ public class WeatherServiceImpl implements WeatherService {
 	
 	@Override
 	public Mono<WeatherResponse> getToday() {
-		return this.getToday(WeatherUtilities.current);
-	}
-
-	@Override
-	public Mono<WeatherResponse> getTodayAll() {
 		return this.getToday(WeatherUtilities.todayAllPeriods);
 	}
 	
 	private Mono<WeatherResponse> getToday(Predicate<? super Period> predicate) {
-		System.out.println("Reactive Service start");
+		logger.info("Reactive Service start");
 		Mono<WeatherResponse> weather = weatherRepo.getDaily()
 				.doOnError(e -> {
 			e.printStackTrace();
 			throw new RuntimeException("Error Retrieving Weather");
-		}).map(item -> {
-			System.out.println("Reactive Map Start");
+		}).transform(item -> {
+			logger.info("Reactive Service transform");
 			return weatherTransformer.transform(item, predicate);
 		});
-		//Mono<Weather> weather = weatherTransformer.transform(weatherRepo.getDaily(), predicate);
-		System.out.println("Reactive Service end");
+
+		logger.info("Reactive Service end");
 		return weather;
 	}
     

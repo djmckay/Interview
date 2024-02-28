@@ -1,8 +1,11 @@
 package tech.djmckay.weather.controller;
 
 
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
@@ -48,5 +51,6 @@ class WeatherReactiveControllerV1Tests {
     @Test
     public void getWeatherSuccessfulTest() throws Exception {
         mockMvc.perform(get(WEATHER_URL))
-                .andExpect(status().is2xxSuccessful());    }
+                .andExpect(status().is2xxSuccessful());
+        }
 }

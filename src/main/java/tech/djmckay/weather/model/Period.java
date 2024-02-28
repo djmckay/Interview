@@ -6,18 +6,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Period {
-	private String number;
+	private Integer number;
 	private String name;
-	private String temperature;
+	private double temperature;
 	private String temperatureUnit;
 	private String shortForecast;
 	private Date startTime;
 	private Date endTime;
 	
-	public String getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
-	public void setNumber(String number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 	public String getName() {
@@ -26,10 +26,10 @@ public class Period {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
-	public void setTemperature(String temperature) {
+	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 	}
 	public String getTemperatureUnit() {

@@ -8,7 +8,5 @@ import tech.djmckay.weather.model.Period;
 
 public interface WeatherTransformer {
 
-	WeatherResponse transform(tech.djmckay.weather.model.Weather item, Predicate<? super Period> predicate);
-
 	Mono<WeatherResponse> transform(Mono<tech.djmckay.weather.model.Weather> item, Predicate<? super Period> predicate);
 }

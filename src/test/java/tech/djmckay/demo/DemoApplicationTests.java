@@ -9,7 +9,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 
 import reactor.core.publisher.Mono;
-import tech.djmckay.demo.dto.Weather;
+import tech.djmckay.weather.DemoApplication;
+import tech.djmckay.weather.dto.WeatherResponse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = DemoApplication.class)
 class DemoApplicationTests {
@@ -64,24 +65,24 @@ class DemoApplicationTests {
 		System.out.println("*** TEST " + "testWebclient" + " ***");
 
 		WebClient client = WebClient.create(SERVER_URL+port);
-		Mono<Weather> result = client.get() //
+		Mono<WeatherResponse> result = client.get() //
 				.uri("/weather/today") //
 				.accept(MediaType.APPLICATION_JSON) //
 				.retrieve() //
-				.bodyToMono(Weather.class);
+				.bodyToMono(WeatherResponse.class);
 
 		// Wait for account to be returned
-		Weather weather = result.block();
+		WeatherResponse weather = result.block();
 
 		System.out.println("Weather: " + weather.getDaily().get(0).getForecastBlurp());
 
 		// Same again, but this time, process asynchronously using subscribe
 		final long startTime = System.currentTimeMillis();
-		Mono<Weather> result2 = client.get() //
+		Mono<WeatherResponse> result2 = client.get() //
 				.uri("/weather/today") //
 				.accept(MediaType.APPLICATION_JSON) //
 				.retrieve() //
-				.bodyToMono(Weather.class);
+				.bodyToMono(WeatherResponse.class);
 
 		result2.subscribe(a -> {
 			System.out.println(System.currentTimeMillis() - startTime);
@@ -98,15 +99,15 @@ class DemoApplicationTests {
 		WebClient client = WebClient.create(SERVER_URL+port);
 		final long startTime = System.currentTimeMillis();
 
-		Mono<Weather> result = client.get() //
+		Mono<WeatherResponse> result = client.get() //
 				.uri("/weather/today") //
 				.accept(MediaType.APPLICATION_JSON) //
 				.retrieve() //
-				.bodyToMono(Weather.class);
+				.bodyToMono(WeatherResponse.class);
 
 		// Wait for account to be returned
 
-		Weather weather = result.block();
+		WeatherResponse weather = result.block();
 		System.out.println(System.currentTimeMillis() - startTime);
 		System.out.println("Weather: " + weather.getDaily().get(0).getForecastBlurp());
 
@@ -118,24 +119,24 @@ class DemoApplicationTests {
 		System.out.println("*** TEST " + "testAsyncWebclient" + " ***");
 
 		WebClient client = WebClient.create(SERVER_URL+port);
-		Mono<Weather> result = client.get() //
+		Mono<WeatherResponse> result = client.get() //
 				.uri("/weather/async/today") //
 				.accept(MediaType.APPLICATION_JSON) //
 				.retrieve() //
-				.bodyToMono(Weather.class);
+				.bodyToMono(WeatherResponse.class);
 
 		// Wait for account to be returned
-		Weather weather = result.block();
+		WeatherResponse weather = result.block();
 
 		System.out.println("Weather: " + weather.getDaily().get(0).getForecastBlurp());
 
 		// Same again, but this time, process asynchronously using subscribe
 		final long startTime = System.currentTimeMillis();
-		Mono<Weather> result2 = client.get() //
+		Mono<WeatherResponse> result2 = client.get() //
 				.uri("/weather/today") //
 				.accept(MediaType.APPLICATION_JSON) //
 				.retrieve() //
-				.bodyToMono(Weather.class);
+				.bodyToMono(WeatherResponse.class);
 
 		result2.subscribe(a -> {
 			System.out.println(System.currentTimeMillis() - startTime);
@@ -152,15 +153,15 @@ class DemoApplicationTests {
 		WebClient client = WebClient.create(SERVER_URL+port);
 		final long startTime = System.currentTimeMillis();
 
-		Mono<Weather> result = client.get() //
+		Mono<WeatherResponse> result = client.get() //
 				.uri("/weather/async/today") //
 				.accept(MediaType.APPLICATION_JSON) //
 				.retrieve() //
-				.bodyToMono(Weather.class);
+				.bodyToMono(WeatherResponse.class);
 
 		// Wait for account to be returned
 
-		Weather weather = result.block();
+		WeatherResponse weather = result.block();
 
 		System.out.println("Weather: " + weather.getDaily().get(0).getForecastBlurp());
 		System.out.println(System.currentTimeMillis() - startTime);

@@ -84,7 +84,7 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: github-action-artifact
-        path: target
+        path: artifacts
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:

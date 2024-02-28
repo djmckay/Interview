@@ -9,12 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>tech.djmckay</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>weather-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>weather-service</name>
+	<description>weather-service project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -46,6 +47,7 @@
     <artifactId>springfox-boot-starter</artifactId>
     <version>3.0.0</version>
 </dependency>
+
 	</dependencies>
 
 	<build>

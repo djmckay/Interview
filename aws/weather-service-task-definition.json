@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "disney-weather-service",
-            "image": "795091308067.dkr.ecr.us-east-1.amazonaws.com/djmckay-tech:2eaae8ab152f6394a27f2b643fdf880ef4d95a97",
+            "image": "795091308067.dkr.ecr.us-east-1.amazonaws.com/disney-weather-service",
             "cpu": 0,
             "portMappings": [
                 {

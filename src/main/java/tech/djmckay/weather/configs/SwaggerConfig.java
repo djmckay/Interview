@@ -23,8 +23,8 @@ public class SwaggerConfig {
 	@Bean
     public Docket api() { 
         return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.any())              
+          .select()      
+          .apis( RequestHandlerSelectors.basePackage( "tech.djmckay.weather.controller" ) )
           .paths(PathSelectors.any())                          
           .build();                                           
     }

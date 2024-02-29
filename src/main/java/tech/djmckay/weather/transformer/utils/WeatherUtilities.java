@@ -45,6 +45,8 @@ public class WeatherUtilities {
     
     static public String dayOfWeek(Period item) {	
     	
+		Optional.ofNullable(item.getStartTime()).orElseThrow();
+
     	Calendar cal = Calendar.getInstance();
         cal.setTime(item.getStartTime());
         switch (cal.get(Calendar.DAY_OF_WEEK)) {

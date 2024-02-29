@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.TextStyle;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -42,12 +43,32 @@ public class WeatherUtilities {
 		return String.format("%.1f", result);
     }
     
-    static public String dayOfWeek(Period item) {		
-		Optional.ofNullable(item.getStartTime()).orElseThrow();
+    static public String dayOfWeek(Period item) {	
+    	
+    	Calendar cal = Calendar.getInstance();
+        cal.setTime(item.getStartTime());
+        switch (cal.get(Calendar.DAY_OF_WEEK)) {
+		case Calendar.SUNDAY: 
+			return "Sunday";
+		case Calendar.MONDAY: 
+			return "Monday";
+		case Calendar.TUESDAY: 
+			return "Tuesday";
+		case Calendar.WEDNESDAY: 
+			return "Wednesday";
+		case Calendar.THURSDAY: 
+			return "Thursday";
+		case Calendar.FRIDAY: 
+			return "Friday";
+		case Calendar.SATURDAY: 
+			return "Saturday";
+		default:
+			return "";
+		}
 		
-		DayOfWeek day = item.getStartTime().toInstant()
-				.atZone(ZoneId.systemDefault()).toLocalDate().getDayOfWeek();
-	    return day.getDisplayName(TextStyle.FULL, Locale.US);
+        
+//        String dayName = LocalDate.now().getDayOfWeek().name();
+//        return dayName.substring(0, 1) + dayName.substring(1).toLowerCase();
 	    
 	}
 }

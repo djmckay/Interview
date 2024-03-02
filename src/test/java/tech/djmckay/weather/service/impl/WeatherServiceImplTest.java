@@ -39,7 +39,6 @@ class WeatherServiceImplTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		
-        
         weatherService.setWeatherTransformer(new WeatherTransformerImpl());
 
 	}
@@ -69,6 +68,8 @@ class WeatherServiceImplTest {
 		periods.add(tomorrow);
 		properties.setPeriods(periods);
 		basicWeather.setProperties(properties);
+		
+		
         when(weatherRepo.getDaily()).thenReturn(Mono.just(basicWeather));
         
 		assertThrows(NoSuchElementException.class, () -> {

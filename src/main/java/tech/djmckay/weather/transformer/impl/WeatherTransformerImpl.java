@@ -24,6 +24,7 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 	public Mono<WeatherResponse> transform(Mono<tech.djmckay.weather.model.Weather> item, Predicate<? super Period> predicate) {
 		logger.info("Reactive Transformer start");
 		return item.map(weather -> {
+			//TODO VALIDATE?
 			WeatherResponse transformedItem = new WeatherResponse();
 			 
 			Forecast results = weather.getProperties().getPeriods().stream()

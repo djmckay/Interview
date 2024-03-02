@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import reactor.core.publisher.Mono;
 import tech.djmckay.weather.dto.WeatherResponse;
+import tech.djmckay.weather.exception.WeatherNotFoundException;
 import tech.djmckay.weather.model.Period;
 import tech.djmckay.weather.repo.WeatherRepo;
 import tech.djmckay.weather.service.WeatherService;
@@ -20,7 +21,7 @@ public class WeatherServiceImpl implements WeatherService {
 
 	private WeatherRepo weatherRepo;
 	private WeatherTransformer weatherTransformer;
-
+	
 	Logger logger = LoggerFactory.getLogger(WeatherServiceImpl.class);
 
 	@Autowired
@@ -40,10 +41,9 @@ public class WeatherServiceImpl implements WeatherService {
 	
 	private Mono<WeatherResponse> getToday(Predicate<? super Period> predicate) {
 		logger.info("Reactive Service start");
-		Mono<WeatherResponse> weather = weatherRepo.getDaily()
-				.doOnError(e -> {
-			e.printStackTrace();
-			throw new RuntimeException("Error Retrieving Weather");
+		Mono<WeatherResponse> weather = weatherRepo.getDaily().doOnError(e -> {
+			logger.info(e.getLocalizedMessage());
+			throw new WeatherNotFoundException(e.getLocalizedMessage());
 		}).transform(item -> {
 			logger.info("Reactive Service transform");
 			return weatherTransformer.transform(item, predicate);

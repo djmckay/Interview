@@ -6,7 +6,7 @@ import tech.djmckay.weather.dto.WeatherResponse;
 
 public interface WeatherService {
 
-	public Mono<WeatherResponse> getToday();
+	public Mono<WeatherResponse> getToday() throws Exception;
 
 //	public Mono<WeatherResponse> getTodayAll();
 

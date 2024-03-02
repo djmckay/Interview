@@ -26,7 +26,7 @@ public class WeatherReactiveControllerV1 {
 	}
 	
 	@GetMapping("/today")
-	public @ResponseBody Mono<WeatherResponse> getToday() {
+	public @ResponseBody Mono<WeatherResponse> getToday() throws Exception {
 		logger.info("Reactive Controller start");
 		final long startTime = System.currentTimeMillis();
 		Mono<WeatherResponse> response = weatherService.getToday(); 

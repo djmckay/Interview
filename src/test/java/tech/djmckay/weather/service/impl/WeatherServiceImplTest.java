@@ -152,7 +152,7 @@ class WeatherServiceImplTest {
         when(weatherRepo.getDaily()).thenReturn(Mono.just(basicWeather));
         
 		WeatherResponse response = weatherService.getToday().block();
-		assertEquals("32.2", response.getDaily().get(0).getTempHighInCelsius());
+		assertEquals(32.2, response.getDaily().get(0).getTempHighInCelsius());
 	}
 	
 	@Test
@@ -192,7 +192,7 @@ class WeatherServiceImplTest {
         when(weatherRepo.getDaily()).thenReturn(Mono.just(basicWeather));
         
 		WeatherResponse response = weatherService.getToday().block();
-		assertEquals("31.7", response.getDaily().get(0).getTempHighInCelsius());
+		assertEquals(31.7, response.getDaily().get(0).getTempHighInCelsius());
 	}
 
 	@Test
@@ -232,7 +232,7 @@ class WeatherServiceImplTest {
         when(weatherRepo.getDaily()).thenReturn(Mono.just(basicWeather));
         
 		WeatherResponse response = weatherService.getToday().block();
-		assertEquals("15.6", response.getDaily().get(0).getTempHighInCelsius());
+		assertEquals(15.6, response.getDaily().get(0).getTempHighInCelsius());
 	}
 	
 	@Test
@@ -273,7 +273,7 @@ class WeatherServiceImplTest {
         when(weatherRepo.getDaily()).thenReturn(Mono.just(basicWeather));
         
 		WeatherResponse response = weatherService.getToday().block();
-		assertEquals("21.1", response.getDaily().get(0).getTempHighInCelsius());
+		assertEquals(21.1, response.getDaily().get(0).getTempHighInCelsius());
 		assertEquals("Expected Text", response.getDaily().get(0).getForecastBlurp());
 
 	}
@@ -318,7 +318,7 @@ class WeatherServiceImplTest {
         when(weatherRepo.getDaily()).thenReturn(Mono.just(basicWeather));
         
 		WeatherResponse response = weatherService.getToday().block();
-		assertEquals("21.1", response.getDaily().get(0).getTempHighInCelsius());
+		assertEquals(21.1, response.getDaily().get(0).getTempHighInCelsius());
 		assertEquals("Expected Text", response.getDaily().get(0).getForecastBlurp());
 
 	}

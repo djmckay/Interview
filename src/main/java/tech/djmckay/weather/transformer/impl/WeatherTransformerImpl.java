@@ -2,25 +2,17 @@ package tech.djmckay.weather.transformer.impl;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import reactor.core.publisher.Mono;
-import tech.djmckay.weather.controller.WeatherReactiveControllerV1;
 import tech.djmckay.weather.dto.Forecast;
 import tech.djmckay.weather.dto.WeatherResponse;
 import tech.djmckay.weather.model.Period;
 import tech.djmckay.weather.transformer.WeatherTransformer;
-import tech.djmckay.weather.transformer.field.WeatherFieldTransformer;
 import tech.djmckay.weather.transformer.utils.WeatherUtilities;
 
 @Component

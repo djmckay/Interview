@@ -1,11 +1,8 @@
 package tech.djmckay.weather.transformer.utils;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.TextStyle;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -18,9 +15,10 @@ public class WeatherUtilities {
     private static String THIS_AFTERNOON = "This Afternoon";
     private static String TONIGHT = "Tonight";
     private static String TODAY = "Today";
+    
 
     static public  Predicate<? super Period> current = period -> {
-        return "1".equals(period.getNumber());
+        return Integer.valueOf(1).equals(period.getNumber());
     };
 
     static public Predicate<? super Period> todayAllPeriods = period -> {
@@ -33,14 +31,16 @@ public class WeatherUtilities {
 
     };
     
-    static public String convertToCelsius(Period today) {
+    static public double convertToCelsius(Period today) {
 		if ("C".equalsIgnoreCase(today.getTemperatureUnit())) {
 			
-			return String.valueOf(today.getTemperature());
+			return today.getTemperature();
 		}
-		Double f = Double.valueOf(today.getTemperature());
-		Double result = (f - 32) * 5/9;
-		return String.format("%.1f", result);
+		double result = (today.getTemperature() - 32) * 5/9;
+		BigDecimal c = new BigDecimal(result);
+
+		c = c.setScale(1, RoundingMode.HALF_UP);
+		return c.doubleValue();
     }
     
     static public String dayOfWeek(Period item) {	
@@ -69,8 +69,6 @@ public class WeatherUtilities {
 		}
 		
         
-//        String dayName = LocalDate.now().getDayOfWeek().name();
-//        return dayName.substring(0, 1) + dayName.substring(1).toLowerCase();
 	    
 	}
 }

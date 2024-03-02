@@ -39,7 +39,7 @@ class WeatherReactiveControllerV1Tests {
     public void setup() {
     	Forecast daily = new Forecast();
     	daily.setName("Monday");
-    	daily.setTempHighInCelsius("27.2");
+    	daily.setTempHighInCelsius(27.2);
     	daily.setForecastBlurp("Partly Sunny");
         WeatherResponse dailyWeatherResponse = new WeatherResponse();
         dailyWeatherResponse.setDaily(new ArrayList<Forecast>());

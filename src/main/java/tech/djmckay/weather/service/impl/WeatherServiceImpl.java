@@ -1,8 +1,5 @@
 package tech.djmckay.weather.service.impl;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
@@ -10,14 +7,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import tech.djmckay.weather.dto.WeatherResponse;
 import tech.djmckay.weather.model.Period;
 import tech.djmckay.weather.repo.WeatherRepo;
 import tech.djmckay.weather.service.WeatherService;
 import tech.djmckay.weather.transformer.WeatherTransformer;
-import tech.djmckay.weather.transformer.impl.WeatherTransformerImpl;
 import tech.djmckay.weather.transformer.utils.WeatherUtilities;
 
 @Service

@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import tech.djmckay.weather.model.Weather;
 import tech.djmckay.weather.repo.WeatherRepo;

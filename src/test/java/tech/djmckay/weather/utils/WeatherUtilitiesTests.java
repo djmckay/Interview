@@ -16,12 +16,23 @@ class WeatherUtilitiesTests {
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
 	@Test
-    public void convertToCelsiusTest() {
+    public void convertToCelsiusNullUnitTest() {
         Period forcast = new Period();
         forcast.setTemperature(80);
-		String actual = WeatherUtilities.convertToCelsius(forcast);
+        forcast.setTemperatureUnit(null);
+        double actual = WeatherUtilities.convertToCelsius(forcast);
 
-        assertEquals("26.7", actual);
+        assertEquals("26.7", String.valueOf(actual));
+    }
+	
+	@Test
+    public void convertToCelsiusInFarenheitUnitTest() {
+        Period forcast = new Period();
+        forcast.setTemperature(80);
+        forcast.setTemperatureUnit("F");
+        double actual = WeatherUtilities.convertToCelsius(forcast);
+        assertEquals(26.7, actual);
+        assertEquals("26.7", String.valueOf(actual));
     }
 	
 	@Test
@@ -29,9 +40,48 @@ class WeatherUtilitiesTests {
         Period forcast = new Period();
         forcast.setTemperature(26.7);
         forcast.setTemperatureUnit("C");
-		String actual = WeatherUtilities.convertToCelsius(forcast);
-
-        assertEquals("26.7", actual);
+		double actual = WeatherUtilities.convertToCelsius(forcast);
+        assertEquals(26.7, actual);
+        assertEquals("26.7", String.valueOf(actual));
+    }
+	
+	@Test
+    public void convertToCelsius32Test() {
+        Period forcast = new Period();
+        forcast.setTemperature(32);
+        forcast.setTemperatureUnit("F");
+        double actual = WeatherUtilities.convertToCelsius(forcast);
+        assertEquals(0, actual);
+        assertEquals("0.0", String.valueOf(actual));
+    }
+	
+	@Test
+    public void convertToCelsiusZeroTest() {
+        Period forcast = new Period();
+        forcast.setTemperature(0);
+        forcast.setTemperatureUnit("F");
+        double actual = WeatherUtilities.convertToCelsius(forcast);
+        assertEquals(-17.8, actual);
+        assertEquals("-17.8", String.valueOf(actual));
+    }
+	
+	@Test
+    public void convertToCelsius100Test() {
+        Period forcast = new Period();
+        forcast.setTemperature(212);
+        forcast.setTemperatureUnit("F");
+        double actual = WeatherUtilities.convertToCelsius(forcast);
+        assertEquals(100, actual);
+        assertEquals("100.0", String.valueOf(actual));
+    }
+	
+	@Test
+    public void convertToCelsiusEmptyTest() {
+        Period forcast = new Period();
+        forcast.setTemperatureUnit("F");
+        double actual = WeatherUtilities.convertToCelsius(forcast);
+        assertEquals(-17.8, actual);
+        assertEquals("-17.8", String.valueOf(actual));
     }
 	
 	@Test

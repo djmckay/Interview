@@ -2,7 +2,7 @@
     "taskDefinitionArn": "arn:aws:ecs:us-east-1:795091308067:task-definition/disney-weather-service-run-task:1",
     "containerDefinitions": [
         {
-            "name": "disney-weather-service",
+            "name": "disney-service-v2",
             "image": "795091308067.dkr.ecr.us-east-1.amazonaws.com/disney-weather-service",
             "cpu": 0,
             "portMappings": [

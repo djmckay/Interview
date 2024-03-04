@@ -1,5 +1,7 @@
 package tech.djmckay.weather.repo.impl;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class WeatherRepoImpl implements WeatherRepo {
 	@Override
 	public Mono<Weather> getDaily() {
 		logger.info("Reactive Repo start");
-		String endpoint = units.isEmpty() ? "gridpoints/MLB/33,70/forecast" : "gridpoints/MLB/33,70/forecast?units="+units;
+		String endpoint = Optional.ofNullable(units).isEmpty() ? "gridpoints/MLB/33,70/forecast" : "gridpoints/MLB/33,70/forecast?units="+units;
 		
 		
 		Mono<Weather> result = weatherClient.get() .uri(endpoint)

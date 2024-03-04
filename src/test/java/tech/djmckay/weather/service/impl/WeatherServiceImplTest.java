@@ -35,9 +35,7 @@ class WeatherServiceImplTest {
 	
 	@InjectMocks
 	private WeatherServiceImpl weatherService;
-	
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-	
+		
 	@BeforeEach
 	void setUp() throws Exception {
 		

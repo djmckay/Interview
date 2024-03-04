@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +14,7 @@ import tech.djmckay.weather.transformer.utils.WeatherUtilities;
 
 class WeatherUtilitiesTests {
 
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZZZZ", Locale.ENGLISH);
 
 	@Test
     public void convertToCelsiusNullUnitTest() {
@@ -87,7 +88,7 @@ class WeatherUtilitiesTests {
 	@Test
     public void convertDayOfWeekThursdayTest() throws ParseException {
         Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-02-29"));
+        forcast.setStartTime(formatter.parse("2024-02-29T18:00:00-0500"));
 		String actual = WeatherUtilities.dayOfWeek(forcast);
 
         assertEquals("Thursday", actual);
@@ -96,7 +97,7 @@ class WeatherUtilitiesTests {
 	@Test
     public void convertDayOfWeekFridayTest() throws ParseException {
         Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-03-01"));
+        forcast.setStartTime(formatter.parse("2024-03-01T18:00:00-0500"));
 		String actual = WeatherUtilities.dayOfWeek(forcast);
 
         assertEquals("Friday", actual);
@@ -105,7 +106,7 @@ class WeatherUtilitiesTests {
 	@Test
     public void convertDayOfWeekSaturdayTest() throws ParseException {
         Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-03-02"));
+        forcast.setStartTime(formatter.parse("2024-03-02T18:00:00-0500"));
 		String actual = WeatherUtilities.dayOfWeek(forcast);
 
         assertEquals("Saturday", actual);
@@ -114,7 +115,7 @@ class WeatherUtilitiesTests {
 	@Test
     public void convertDayOfWeekSundayTest() throws ParseException {
         Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-05-05"));
+        forcast.setStartTime(formatter.parse("2024-03-03T18:00:00-0500"));
 		String actual = WeatherUtilities.dayOfWeek(forcast);
 
         assertEquals("Sunday", actual);
@@ -123,7 +124,7 @@ class WeatherUtilitiesTests {
 	@Test
     public void convertDayOfWeekMondayTest() throws ParseException {
         Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-05-06"));
+        forcast.setStartTime(formatter.parse("2024-05-06T18:00:00-0400"));
 		String actual = WeatherUtilities.dayOfWeek(forcast);
 
         assertEquals("Monday", actual);
@@ -132,7 +133,7 @@ class WeatherUtilitiesTests {
 	@Test
     public void convertDayOfWeekTuedayTest() throws ParseException {
         Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-05-07"));
+        forcast.setStartTime(formatter.parse("2024-05-07T18:00:00-0400"));
 		String actual = WeatherUtilities.dayOfWeek(forcast);
 
         assertEquals("Tuesday", actual);
@@ -141,9 +142,28 @@ class WeatherUtilitiesTests {
 	@Test
     public void convertDayOfWeekWednesdayTest() throws ParseException {
         Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-05-08"));
+        forcast.setStartTime(formatter.parse("2024-05-08T18:00:00-0400"));
 		String actual = WeatherUtilities.dayOfWeek(forcast);
 
         assertEquals("Wednesday", actual);
     }
+	
+	@Test
+    public void convertDayOfWeekSundayGMTTest() throws ParseException {
+        Period forcast = new Period();
+        forcast.setStartTime(formatter.parse("2024-03-03T23:59:59-0500"));
+		String actual = WeatherUtilities.dayOfWeek(forcast);
+
+        assertEquals("Sunday", actual);
+    }
+	
+	@Test
+	public void convertDayOfWeekNullStartTimeTest() throws ParseException {
+		Period forcast = new Period();
+		forcast.setStartTime(null);
+
+		assertThrows(NoSuchElementException.class, () -> {
+			String actual = WeatherUtilities.dayOfWeek(forcast);
+		});
+	}
 }

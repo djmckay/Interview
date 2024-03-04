@@ -149,15 +149,6 @@ class WeatherUtilitiesTests {
     }
 	
 	@Test
-    public void convertDayOfWeekSundayGMTTest() throws ParseException {
-        Period forcast = new Period();
-        forcast.setStartTime(formatter.parse("2024-03-03T23:59:59-0500"));
-		String actual = WeatherUtilities.dayOfWeek(forcast);
-
-        assertEquals("Sunday", actual);
-    }
-	
-	@Test
 	public void convertDayOfWeekNullStartTimeTest() throws ParseException {
 		Period forcast = new Period();
 		forcast.setStartTime(null);

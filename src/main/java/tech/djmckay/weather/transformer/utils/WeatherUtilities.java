@@ -49,24 +49,9 @@ public class WeatherUtilities {
 
     	Calendar cal = Calendar.getInstance();
         cal.setTime(item.getStartTime());
-        switch (cal.get(Calendar.DAY_OF_WEEK)) {
-		case Calendar.SUNDAY: 
-			return "Sunday";
-		case Calendar.MONDAY: 
-			return "Monday";
-		case Calendar.TUESDAY: 
-			return "Tuesday";
-		case Calendar.WEDNESDAY: 
-			return "Wednesday";
-		case Calendar.THURSDAY: 
-			return "Thursday";
-		case Calendar.FRIDAY: 
-			return "Friday";
-		case Calendar.SATURDAY: 
-			return "Saturday";
-		default:
-			return "";
-		}
+        String[] wd = {"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        return wd[cal.get(Calendar.DAY_OF_WEEK) % 8];
+        
 		
         
 	    

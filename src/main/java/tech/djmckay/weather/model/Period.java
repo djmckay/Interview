@@ -1,7 +1,9 @@
 package tech.djmckay.weather.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
@@ -11,8 +13,9 @@ public class Period {
 	private double temperature;
 	private String temperatureUnit;
 	private String shortForecast;
-	private Date startTime;
-	private Date endTime;
+	@JsonFormat 
+    (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssxxx")
+	private LocalDateTime startTime;
 	
 	public int getNumber() {
 		return number;
@@ -44,18 +47,13 @@ public class Period {
 	public void setShortForecast(String shortForecast) {
 		this.shortForecast = shortForecast;
 	}
-	public Date getStartTime() {
+	public LocalDateTime getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(Date startTime) {
+	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
-	public Date getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
+	
 	
 
 }

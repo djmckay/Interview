@@ -3,6 +3,7 @@ package tech.djmckay.weather.transformer.impl;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.function.Predicate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,9 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 					.map(today -> {
 						Forecast daily = new Forecast();
 						daily.setForecastBlurp(today.getShortForecast());
-						daily.setName(WeatherUtilities.dayOfWeek(today));
+						Optional.ofNullable(today.getStartTime()).orElseThrow();
+						String dayName = today.getStartTime().getDayOfWeek().name();
+						daily.setName(dayName.substring(0, 1) + dayName.substring(1).toLowerCase());
 						daily.setTempHighInCelsius(WeatherUtilities.convertToCelsius(today));
 
 

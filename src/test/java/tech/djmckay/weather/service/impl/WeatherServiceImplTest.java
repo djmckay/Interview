@@ -5,6 +5,8 @@ import static org.mockito.Mockito.when;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -98,12 +100,12 @@ class WeatherServiceImplTest {
 		Period tonight = new Period();
 		tonight.setName("Tonight");
 		tonight.setTemperature(70);
-		tonight.setStartTime(formatter.parse("2024-02-28"));
+		tonight.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
 		periods.add(tonight);
 		Period tomorrow = new Period();
 		tomorrow.setName("Tomorrow");
 		tomorrow.setTemperature(60);
-		tomorrow.setStartTime(formatter.parse("2024-02-29"));
+		tonight.setStartTime(LocalDateTime.of(2024, 2, 29, 0, 0));
 		periods.add(tomorrow);
 		properties.setPeriods(periods);
 		basicWeather.setProperties(properties);
@@ -130,23 +132,26 @@ class WeatherServiceImplTest {
 		Period today = new Period();
 		today.setName("Today");
 		today.setTemperature(80);
-		today.setStartTime(formatter.parse("2024-02-28"));
+		today.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
 		periods.add(today);
 		Period thisAfternoon = new Period();
 		thisAfternoon.setName("This Afternoon");
 		thisAfternoon.setTemperature(90);
 
-		thisAfternoon.setStartTime(formatter.parse("2024-02-28"));
+		thisAfternoon.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(thisAfternoon);
 		Period tonight = new Period();
 		tonight.setName("Tonight");
 		tonight.setTemperature(70);
-		tonight.setStartTime(formatter.parse("2024-02-28"));
+		tonight.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(tonight);
 		Period tomorrow = new Period();
 		tomorrow.setName("Tomorrow");
 		tomorrow.setTemperature(60);
-		tomorrow.setStartTime(formatter.parse("2024-02-29"));
+		tomorrow.setStartTime(LocalDateTime.of(2024, 2, 29, 0, 0));
+
 		periods.add(tomorrow);
 		properties.setPeriods(periods);
 		basicWeather.setProperties(properties);
@@ -170,23 +175,26 @@ class WeatherServiceImplTest {
 		Period today = new Period();
 		today.setName("Today");
 		today.setTemperature(70);
-		today.setStartTime(formatter.parse("2024-02-28"));
+		today.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(today);
 		Period thisAfternoon = new Period();
 		thisAfternoon.setName("This Afternoon");
 		thisAfternoon.setTemperature(60);
+		thisAfternoon.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
 
-		thisAfternoon.setStartTime(formatter.parse("2024-02-28"));
 		periods.add(thisAfternoon);
 		Period tonight = new Period();
 		tonight.setName("Tonight");
 		tonight.setTemperature(89);
-		tonight.setStartTime(formatter.parse("2024-02-28"));
+		tonight.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(tonight);
 		Period tomorrow = new Period();
 		tomorrow.setName("Tomorrow");
 		tomorrow.setTemperature(60);
-		tomorrow.setStartTime(formatter.parse("2024-02-29"));
+		tomorrow.setStartTime(LocalDateTime.of(2024, 2, 29, 0, 0));
+
 		periods.add(tomorrow);
 		properties.setPeriods(periods);
 		basicWeather.setProperties(properties);
@@ -210,23 +218,26 @@ class WeatherServiceImplTest {
 		Period today = new Period();
 		today.setName("Today");
 		today.setTemperature(50);
-		today.setStartTime(formatter.parse("2024-02-28"));
+		today.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(today);
 		Period thisMorning = new Period();
 		thisMorning.setName("This Morning");
 		thisMorning.setTemperature(60);
+		thisMorning.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
 
-		thisMorning.setStartTime(formatter.parse("2024-02-28"));
 		periods.add(thisMorning);
 		Period tonight = new Period();
 		tonight.setName("Tonight");
 		tonight.setTemperature(50);
-		tonight.setStartTime(formatter.parse("2024-02-28"));
+		tonight.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(tonight);
 		Period tomorrow = new Period();
 		tomorrow.setName("Tomorrow");
 		tomorrow.setTemperature(50);
-		tomorrow.setStartTime(formatter.parse("2024-02-29"));
+		tomorrow.setStartTime(LocalDateTime.of(2024, 2, 29, 0, 0));
+
 		periods.add(tomorrow);
 		properties.setPeriods(periods);
 		basicWeather.setProperties(properties);
@@ -250,24 +261,27 @@ class WeatherServiceImplTest {
 		Period today = new Period();
 		today.setName("Today");
 		today.setTemperature(50);
-		today.setStartTime(formatter.parse("2024-02-28"));
+		today.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(today);
 		Period thisMorning = new Period();
 		thisMorning.setName("This Morning");
 		thisMorning.setTemperature(60);
+		thisMorning.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
 
-		thisMorning.setStartTime(formatter.parse("2024-02-28"));
 		periods.add(thisMorning);
 		Period tonight = new Period();
 		tonight.setName("Tonight");
 		tonight.setTemperature(70);
 		tonight.setShortForecast("Expected Text");
-		tonight.setStartTime(formatter.parse("2024-02-28"));
+		tonight.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(tonight);
 		Period tomorrow = new Period();
 		tomorrow.setName("Tomorrow");
 		tomorrow.setTemperature(50);
-		tomorrow.setStartTime(formatter.parse("2024-02-29"));
+		tomorrow.setStartTime(LocalDateTime.of(2024, 2, 29, 0, 0));
+
 		periods.add(tomorrow);
 		properties.setPeriods(periods);
 		basicWeather.setProperties(properties);
@@ -294,25 +308,28 @@ class WeatherServiceImplTest {
 		Period today = new Period();
 		today.setName("Today");
 		today.setTemperature(70);
-		today.setStartTime(formatter.parse("2024-02-28"));
+		today.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		today.setShortForecast("Expected Text");
 
 		periods.add(today);
 		Period thisMorning = new Period();
 		thisMorning.setName("This Morning");
 		thisMorning.setTemperature(60);
+		thisMorning.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
 
-		thisMorning.setStartTime(formatter.parse("2024-02-28"));
 		periods.add(thisMorning);
 		Period tonight = new Period();
 		tonight.setName("Tonight");
 		tonight.setTemperature(70);
-		tonight.setStartTime(formatter.parse("2024-02-28"));
+		tonight.setStartTime(LocalDateTime.of(2024, 2, 28, 0, 0));
+
 		periods.add(tonight);
 		Period tomorrow = new Period();
 		tomorrow.setName("Tomorrow");
 		tomorrow.setTemperature(50);
-		tomorrow.setStartTime(formatter.parse("2024-02-29"));
+		tomorrow.setStartTime(LocalDateTime.of(2024, 2, 29, 0, 0));
+
 		periods.add(tomorrow);
 		properties.setPeriods(periods);
 		basicWeather.setProperties(properties);

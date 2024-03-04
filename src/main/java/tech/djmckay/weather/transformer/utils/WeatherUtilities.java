@@ -43,17 +43,4 @@ public class WeatherUtilities {
 		return c.doubleValue();
     }
     
-    static public String dayOfWeek(Period item) {	
-    	
-		Optional.ofNullable(item.getStartTime()).orElseThrow();
-
-    	Calendar cal = Calendar.getInstance();
-        cal.setTime(item.getStartTime());
-        String[] wd = {"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-        return wd[cal.get(Calendar.DAY_OF_WEEK) % 8];
-        
-		
-        
-	    
-	}
 }

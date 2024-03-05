@@ -24,7 +24,7 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 	@Override
 	public Mono<WeatherResponse> transform(Mono<tech.djmckay.weather.model.Weather> item, Predicate<? super Period> predicate) {
 		logger.info("Reactive Transformer start");
-		return item.map(weather -> {
+		return item.flatMap(weather -> {
 			logger.info("Reactive Transformer Map start");
 			//TODO VALIDATE?
 			WeatherResponse transformedItem = new WeatherResponse();
@@ -46,7 +46,7 @@ public class WeatherTransformerImpl implements WeatherTransformer {
 					.orElseThrow(NoSuchElementException::new);
 			transformedItem.setDaily(Arrays.asList(results));
 			logger.info("Reactive Transformer Map end");
-			return transformedItem;
+			return Mono.just(transformedItem);
 		});
 		
 	}

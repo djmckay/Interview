@@ -52,6 +52,10 @@
     <groupId>com.fasterxml.jackson.datatype</groupId>
     <artifactId>jackson-datatype-jsr310</artifactId>
 </dependency>
+<dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-reactive-httpclient</artifactId>
+</dependency>
 	</dependencies>
 
 	<build>

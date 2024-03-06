@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import reactor.core.publisher.Mono;
 import tech.djmckay.weather.dto.Forecast;
 import tech.djmckay.weather.dto.WeatherResponse;
+import tech.djmckay.weather.exception.WeatherNotFoundException;
 import tech.djmckay.weather.service.impl.WeatherServiceImpl;
 
 @WebMvcTest(WeatherReactiveControllerV1.class)
@@ -52,8 +53,15 @@ class WeatherReactiveControllerV1Tests {
 	
 	@Test
 	public void getWeatherExceptionTest() throws Exception {
-        when(weatherService.getToday()).thenThrow(Exception.class);
+        when(weatherService.getToday()).thenThrow(WeatherNotFoundException.class);
 
 		mockMvc.perform(get(WEATHER_URL)).andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void getExceptionTest() throws Exception {
+        when(weatherService.getToday()).thenThrow(Exception.class);
+
+		mockMvc.perform(get(WEATHER_URL)).andExpect(status().isInternalServerError());
 	}
 }
